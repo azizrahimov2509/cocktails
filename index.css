@@ -367,7 +367,7 @@ Cocktail
   font-weight: bold;
   text-transform: capitalize;
   line-height: 1.8;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .drink span {
@@ -412,7 +412,6 @@ Cocktail
   color: var(--primaryColor);
   text-indent: -9999em;
   margin: 88px auto;
-  margin-top: 20rem;
   position: relative;
   font-size: 3rem;
   -webkit-transform: translateZ(0);

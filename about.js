@@ -4,7 +4,7 @@ const myParam = urlParams.get('id');
 const titleSection = document.querySelector(".section-title");
 const loader = document.querySelector('.loader');
 
-
+loader.classList.remove('hidden');
 
 fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${myParam}`).then((res)=>res.json())
 .then((data)=>{
@@ -17,7 +17,7 @@ function getDrinks(item){
         const div = document.createElement('div');
         div.classList.add('titles');
         div.innerHTML = `
-        <h2 class="section-text"${item.strDrink}</h2>
+        <h2 class="section-text" style="margin-bottom: 56px; margin-top: 16px">${item.strDrink}</h2>
                 <div class="drink">
                     <img
                         src=${item.strDrinkThumb}

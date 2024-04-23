@@ -1,10 +1,11 @@
 const cocktailsCenter = document.getElementById("cocktails-center");
 const loader = document.querySelector(".loader");
-const error = document.querySelector('#error');
+let error = document.querySelector('#error');
 const input = document.querySelector('#input')
 
 
 loader.classList.remove('hidden');
+error.classList.add('hidden');
 
 function createDrinks(data) {
     cocktailsCenter.innerHTML = '';
@@ -45,25 +46,30 @@ getDrink("search.php?s=");
 
 
 
-input.addEventListener('input',(e)=>{
+input.addEventListener('input', (e) => {
     cocktailsCenter.innerHTML = '';
     loader.classList.remove('hidden');
-  const  url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${e.target.value}`
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${e.target.value}`;
 
-  fetch(url)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    }).then((data) => {
-            loader.classList.add('hidden');
-            error.classList.add('hidden');
-            createDrinks(data)
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
         })
-        .catch((error) => {
+        .then((data) => {
             loader.classList.add('hidden');
             error.classList.add('hidden');
+            if (data.drinks && data.drinks.length > 0) {
+                createDrinks(data);
+            } else {
+                error.classList.remove('hidden');
+                error.innerHTML = `<h2 style="display: flex; justify-content: center;color: red;" >Malumot topilmadi!</h2>`;
+            }
+        })
+        .catch((err) => {
+            loader.classList.add('hidden');
+            error.classList.remove('hidden');
         });
-
-})
+});
